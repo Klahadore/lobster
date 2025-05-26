@@ -103,7 +103,12 @@ class PEERDataset(Dataset):
 
     def _load_data(self) -> None:
         """Load data from Hugging Face."""
-        dataset = load_dataset("taylor-joren/peer", data_files=self.hf_data_file, split="train")
+        dataset = load_dataset(
+            "taylor-joren/peer",
+            data_files=self.hf_data_file,
+            split="train",
+            cache_dir=str(self.root)
+        )
         self.data = dataset.to_pandas()
 
     def _set_columns(self, columns=None):
